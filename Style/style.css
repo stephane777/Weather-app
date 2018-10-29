@@ -32,7 +32,10 @@ body{
      font-weight: bold;
      display: inline-block;
      vertical-align: middle;
-     padding: 20px 0 40px 0;
+     padding: 20px 0 5px 0;
+ }
+ #city + p {
+     padding-bottom: 40px;
  }
  #description{
      font-weight: bold;
@@ -49,7 +52,7 @@ body{
      font-size: 44px;
      vertical-align: middle;
      color: rgb(179, 28, 2);
-     padding: 20px 14px 40px 0;
+     padding: 20px 14px 5px 0;
  }
  .search-input{
      margin: 0 auto;
@@ -65,3 +68,15 @@ body{
      color: #777;
  }
  /* textarea, input { outline: none; } */
+
+ .info  {
+     padding-top: 40px;
+ }
+ .info-left, .info-center, .info-right{
+     display: inline-block;
+     width: 25%;
+     margin : auto 0;
+ }
+ #humidity, #pressure, #tMin, #tMax {
+     font-style: italic;
+ }

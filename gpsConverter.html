@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        const long= -0.118092
+        const lat= 51.509865
+        
+        const converter = ((lg, lt) => {
+            const lgDeg = String(Math.abs(lg)).split('.')[0];  // 0 degree
+            const ltDeg = String(Math.abs(lt)).split('.')[0];  // 51 degree
+
+            const lgMin = Math.floor((Math.abs(lg) - Number.parseFloat(lgDeg))*60);
+            const ltMin = Math.floor((Math.abs(lt) - Number.parseFloat(ltDeg))*60);
+
+            let lgSec = (((Math.abs(lg) - Number.parseFloat(lgDeg))*60) - lgMin)*60;
+            let ltSec = (((Math.abs(lt) - Number.parseFloat(ltDeg))*60) - ltMin)*60;
+            lgSec = lgSec.toFixed(4);
+            ltSec = ltSec.toFixed(4);
+
+            const lgHem = ( lg > 0 ? 'E' : 'W');
+            const ltHem = ( lt > 0 ? 'N' : 'S');
+            // String(lg)
+            return [lgDeg+'° '+lgMin +'\' '+ lgSec+'\'\' '+lgHem, ltDeg+'° '+ltMin+'\' '+ltSec+'\'\' '+ltHem];
+        })
+        
+        console.log(converter(long,lat));
+
+
+    
+    
+    </script>
+</head>
+<body>
+    
+</body>
+
+</html>

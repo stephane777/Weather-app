@@ -17,8 +17,26 @@
     let pressure = document.getElementById("pressure");
     let country = document.getElementById("country");
     let img = document.getElementById("img");
+    let humidity = document.getElementById("humidity");
     let el = document.getElementById("city_search");
-  
+    
+    const converter = ((lg, lt) => {
+        const lgDeg = String(Math.abs(lg)).split('.')[0];  // 0 degree
+        const ltDeg = String(Math.abs(lt)).split('.')[0];  // 51 degree
+
+        const lgMin = Math.floor((Math.abs(lg) - Number.parseFloat(lgDeg))*60);
+        const ltMin = Math.floor((Math.abs(lt) - Number.parseFloat(ltDeg))*60);
+
+        let lgSec = (((Math.abs(lg) - Number.parseFloat(lgDeg))*60) - lgMin)*60;
+        let ltSec = (((Math.abs(lt) - Number.parseFloat(ltDeg))*60) - ltMin)*60;
+        lgSec = lgSec.toFixed(4);
+        ltSec = ltSec.toFixed(4);
+
+        const lgHem = ( lg > 0 ? 'E' : 'W');
+        const ltHem = ( lt > 0 ? 'N' : 'S');
+        // String(lg)
+        return [lgDeg+'° '+lgMin +'\' '+ lgSec+'\'\' '+lgHem, ltDeg+'° '+ltMin+'\' '+ltSec+'\'\' '+ltHem];
+    })
     
 
     const getLoc = new Promise((resolve, reject)=>{
@@ -49,11 +67,14 @@
 
     // let weather;
     getLoc.then(coord=>{
-        lgt.innerHTML = coord[1];
-        lat.innerHTML = coord[0];
+        const DMSCoord = converter(coord[1],coord[0]);
+        // lgt.innerHTML = coord[1];
+        // lat.innerHTML = coord[0];
+        lgt.innerHTML = DMSCoord[1];
+        lat.innerHTML = DMSCoord[0];
         return getWeather(coord);
     }).then( result =>{
-        // console.log(result);
+        //  console.log(result);
 
         city.innerHTML = `${result.name}, ${result.sys.country}`;
         description.innerHTML = result.weather[0].description;
@@ -62,22 +83,23 @@
         tMax.innerHTML = `${result.main.temp_max} ˚C`;
         tMin.innerHTML = `${result.main.temp_min} ˚C`;
         pressure.innerHTML = `${result.main.pressure} hPa`;
+        humidity.innerHTML = `${result.main.humidity}`;
     }).catch(error=>{
         console.log(error);
     })
 
-    // const getCities = new Promise((resolve, reject)=>{
+    const getCities = new Promise((resolve, reject)=>{
         el.addEventListener('keypress',(event)=>{
             // console.log("test enter");
             if (event.code === 13 || event.which === 13) {
-                // resolve( el.value );
+                 resolve( el.value );
                 
             }
             // } else{
             //     reject("press enter!");
             // }
         });
-    // })
+     })
     async function searchCities(city){
         try{
             const result = fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&appid=cc93c5e0ed63d39279c7218d068aa015`);
