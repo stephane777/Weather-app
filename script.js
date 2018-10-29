@@ -17,6 +17,9 @@
     let pressure = document.getElementById("pressure");
     let country = document.getElementById("country");
     let img = document.getElementById("img");
+    let el = document.getElementById("city_search");
+  
+    
 
     const getLoc = new Promise((resolve, reject)=>{
         function getLocation() {
@@ -36,8 +39,6 @@
         try{
             const result = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coordS[0]}&lon=${coordS[1]}&units=metric&appid=cc93c5e0ed63d39279c7218d068aa015`);
             // const result = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=51.4616696&lon=-0.1693785&units=metric&appid=cc93c5e0ed63d39279c7218d068aa015`);
-            const status = result.status;
-            console.log(status);
             const data = await result.json();
             return data;
         }catch(error){
@@ -46,13 +47,13 @@
         }
     }
 
-    let weather;
+    // let weather;
     getLoc.then(coord=>{
         lgt.innerHTML = coord[1];
         lat.innerHTML = coord[0];
         return getWeather(coord);
     }).then( result =>{
-        console.log(result);
+        // console.log(result);
 
         city.innerHTML = `${result.name}, ${result.sys.country}`;
         description.innerHTML = result.weather[0].description;
@@ -61,17 +62,42 @@
         tMax.innerHTML = `${result.main.temp_max} ˚C`;
         tMin.innerHTML = `${result.main.temp_min} ˚C`;
         pressure.innerHTML = `${result.main.pressure} hPa`;
-        
-        // console.log(result.main.temp);
-        // console.log(result.main.humidity);
-        // console.log(result.main.pressure);
-        // console.log(result.main.temp_max);
-        // console.log(result.main.temp_min);
     }).catch(error=>{
         console.log(error);
     })
 
-
+    // const getCities = new Promise((resolve, reject)=>{
+        el.addEventListener('keypress',(event)=>{
+            // console.log("test enter");
+            if (event.code === 13 || event.which === 13) {
+                // resolve( el.value );
+                
+            }
+            // } else{
+            //     reject("press enter!");
+            // }
+        });
+    // })
+    async function searchCities(city){
+        try{
+            const result = fetch(`https://api.openweathermap.org/data/2.5/weather?q=London&appid=cc93c5e0ed63d39279c7218d068aa015`);
+            const data = await result;
+            const dt = await data.json();
+            return dt;
+        }catch(error) 
+        {
+            console.log(error);
+        }
+    }
+    getCities.then((cities)=>{
+        // console.log(cities);
+        return searchCities(cities);
+    }).then(result =>{
+        console.log(result);
+    })
+    .catch((error)=>{
+        console.log(error);
+    })
 
 
 /*

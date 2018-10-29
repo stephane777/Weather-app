@@ -4,33 +4,41 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Weather app</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
-   
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <title>Weather</title>
 </head>
 
 <body>
     <header>
-        <title>Weather</title>
+        <div class="header-wrapper">
+           <div class="search-input">
+                <input type="text" id="city_search" name="ip-display" pattern="[A-Za-z\s]+" minlength="2" placeholder="search city"
+                required />
+           </div>
+           
+        </div>
     </header>
     <section class="weather">
         <div class="frame">
+            <div class="temp"></div>
+            <ion-icon name="pin"></ion-icon>
             <div id="city"></div>
-            <div id="country"></div>
             <div id="description"></div>
-            <div id="temperature"></div>
             <img id="img">
+            <div id="temperature"></div>
             <div id="tMin"></div>
             <div id="tMax"></div>
             <div id="pressure"></div>
             <div id="longitude"></div>
             <div id="latitude"></div>
-            
+
         </div>
 
     </section>
 </body>
 <script src="script.js"></script>
-
+<script src="https://unpkg.com/ionicons@4.4.6/dist/ionicons.js"></script>
 </html>
