@@ -74,7 +74,7 @@ body{
  }
  .info-left, .info-center, .info-right{
      display: inline-block;
-     width: 25%;
+     width: 30%;
      margin : auto 0;
  }
  #humidity, #pressure, #tMin, #tMax {
