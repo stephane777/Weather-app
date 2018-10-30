@@ -5,41 +5,45 @@
     margin: 0;
 }
 body{
-    background-image: url("https://farm2.staticflickr.com/1941/45181852332_eeb41ba2c9_k.jpg");
+    /* background-image: url("https://farm2.staticflickr.com/1941/45181852332_eeb41ba2c9_k.jpg"); */
     /* background-image: linear-gradient(rgba(0, 0, 0, 0.4),rgba(0, 0, 0, 0.4)), url(https://farm1.staticflickr.com/806/40013409285_c4b4765906_k.jpg); */
+    background-image: url("https://farm2.staticflickr.com/1927/31766452788_94b6c6292f_b.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
     height: 100vh;
-    font-family: 'Montserrat', sans-serif;
+    /* font-family: 'Montserrat', sans-serif; */
+    font-family: 'Open Sans', sans-serif;
 }
 .header-wrapper{
     height: 150px;
     /* padding-top:100px; */
 }
  .frame{
-     background: rgba(70, 132, 170, 0.5);
-    /* border-radius:7%; */
+     background: rgba(0, 21, 59, 0.8);
+    /* border-radius: %; */
     margin: 0 auto;
     width: 800px;
     height: 400px;
-    border: 3px solid #fff;
+    border: 1px solid #fff;
     text-align: center;
+    color: white;
+    box-shadow: 2px 2px #fff;
  }
  #city{
-     font-size: 55px;
-     font-weight: bold;
+     font-size: 45px;
+     /* font-weight: bold; */
      display: inline-block;
      vertical-align: middle;
      padding: 20px 0 5px 0;
+     letter-spacing: 1.2px;
+     /* line-height: 50px; */
  }
  #city + p {
      padding-bottom: 40px;
  }
- #description{
-     font-weight: bold;
- }
+
  #img {
      vertical-align: middle;
  }
@@ -53,6 +57,26 @@ body{
      vertical-align: middle;
      color: rgb(179, 28, 2);
      padding: 20px 14px 5px 0;
+ }
+ i {
+     color: white;
+     /* font-size: 14px; */
+ }
+ .info-center-50percent > i{
+     font-size: 24px;
+ }
+ .info-center-50percent {
+     width: 40%;
+     display: inline-block;
+     vertical-align: middle;
+ }
+ .left {
+    text-align: left;
+    padding: 0 0 10px 5px;
+ }
+ .right{
+     text-align: right;
+     padding: 0 5px 10px;
  }
  .search-input{
      margin: 0 auto;
@@ -80,3 +104,22 @@ body{
  #humidity, #pressure, #tMin, #tMax {
      font-style: italic;
  }
+
+ .i-thermo, .temp {
+     display: inline-block;
+ }
+ .i-thermo {
+     font-size: 34px;
+     width: 20px;
+     padding-right: 5px;
+ }
+ .temp {
+    width: 30px;
+
+ }
+ /* .i-thermo {
+     width: 20%;
+ }
+ .temp{
+     width: 70%;
+ } */

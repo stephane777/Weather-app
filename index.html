@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" media="screen" href="Style/weather-icons.min.css" />
 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <title>Weather</title>
 </head>
 
@@ -37,17 +38,29 @@
             <div id="temperature"></div>
             <div class="info">
                 <div class="info-left">
-                    <p><span><b>Min : </b></span><span id='tMin'></span></p>
-                    <p><span><b>Max : </b></span><span id='tMax'></span></p>
+                    <div class="i-thermo">
+                        <i class="wi wi-thermometer"></i>
+                    </div>
+                    <div class="temp">
+                        <p><span id='tMax'></span></p>
+                        <p><span id='tMin'></span></p>
+                    </div>
                 </div>
-                <div class="info-center">    
-                    <p><span><b>Pressure : </b></span><span id='pressure'></span></p>
-                    <p><span><b>Humidity : </b></span><span id='humidity'></span></p>
-                    
+                <div class="info-center">
+                    <div class="info-center-50percent right"><i class="wi wi-barometer"></i></div>
+                    <div class="info-center-50percent left"><p></i><span id='pressure'></span></p></div>
+                    <div class="info-center-50percent right"><i class="wi wi-humidity"></i></div>
+                    <div class="info-center-50percent left"><span id='humidity'></span></div>
+                    <div id="deg" class="info-center-50percent right"></div>
+                    <div class="info-center-50percent left"><span id='wind'></span></div>   
                 </div>
                 <div class="info-right">
-                    <p><span>to be completed</span></p>
-                    <p><span>to be completed</span></p>
+                    <div class="info-center-50percent"><i class="wi wi-sunrise"></i></div>
+                    <div class="info-center-50percent"><span id="sunrise"></span></div>
+                    <div class="info-center-50percent"><i class="wi wi-sunset"></i></div>
+                    <div class="info-center-50percent"><span id="sunset"></span></div>
+                    <p></p>
+                    <p></p>
                 </div>
             </div>
         </div>

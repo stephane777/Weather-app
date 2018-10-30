@@ -19,7 +19,11 @@
     let img = document.getElementById("img");
     let humidity = document.getElementById("humidity");
     let el = document.getElementById("city_search");
-    
+    let wind = document.getElementById("wind");
+    let deg = document.getElementById("deg");
+    let sunrise = document.getElementById("sunrise");
+    let sunset = document.getElementById("sunset");
+
     const converter = ((lg, lt) => {
         const lgDeg = String(Math.abs(lg)).split('.')[0];  // 0 degree
         const ltDeg = String(Math.abs(lt)).split('.')[0];  // 51 degree
@@ -74,16 +78,27 @@
         lat.innerHTML = DMSCoord[0];
         return getWeather(coord);
     }).then( result =>{
-        //  console.log(result);
-
-        city.innerHTML = `${result.name}, ${result.sys.country}`;
-        description.innerHTML = result.weather[0].description;
-        temperature.innerHTML = `${result.main.temp} ˚C`;
+          console.log(result);
+        
+        city.innerText = `${result.name}, ${result.sys.country}`;
+        description.innerText = result.weather[0].description;
+        temperature.innerText = `${result.main.temp} ˚C`;
         img.src =`http://openweathermap.org/img/w/${result.weather[0].icon}.png`;
-        tMax.innerHTML = `${result.main.temp_max} ˚C`;
-        tMin.innerHTML = `${result.main.temp_min} ˚C`;
-        pressure.innerHTML = `${result.main.pressure} hPa`;
-        humidity.innerHTML = `${result.main.humidity}`;
+        tMax.innerText = `${result.main.temp_max} ˚`;
+        tMin.innerText = `${result.main.temp_min} ˚`;
+        pressure.innerText = `${result.main.pressure} hPa`;
+        humidity.innerText = `${result.main.humidity}`;
+        wind.innerText = `${result.wind.speed}`;
+        deg.innerHTML =`<i class="wi wi-wind from-${result.wind.deg}-deg"></i>`;
+        const sunriseDate = new Date(result.sys.sunrise*1000);
+        const sunriseHour = sunriseDate.getHours();
+        const sunriseMin = sunriseDate.getMinutes();
+        const sunsetDate = new Date(result.sys.sunset*1000);
+        const sunsetHour = sunsetDate.getHours();
+        const sunsetMin = sunsetDate.getMinutes();
+        // let sunriseMin = (new Date(result.sys.sunrise)).getMinutes();
+        sunrise.innerText =`${sunriseHour}:${sunriseMin}am`;
+        sunset.innerText =`${sunsetHour}:${sunsetMin}pm`;
     }).catch(error=>{
         console.log(error);
     })
