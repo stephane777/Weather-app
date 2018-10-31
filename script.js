@@ -83,7 +83,7 @@
         city.innerText = `${result.name}, ${result.sys.country}`;
         description.innerText = result.weather[0].description;
         temperature.innerText = `${result.main.temp} ˚C`;
-        img.src =`http://openweathermap.org/img/w/${result.weather[0].icon}.png`;
+        img.src =`https://openweathermap.org/img/w/${result.weather[0].icon}.png`;
         tMax.innerText = `${result.main.temp_max} ˚`;
         tMin.innerText = `${result.main.temp_min} ˚`;
         pressure.innerText = `${result.main.pressure} hPa`;
@@ -96,7 +96,6 @@
         const sunsetDate = new Date(result.sys.sunset*1000);
         const sunsetHour = sunsetDate.getHours();
         const sunsetMin = sunsetDate.getMinutes();
-        // let sunriseMin = (new Date(result.sys.sunrise)).getMinutes();
         sunrise.innerText =`${sunriseHour}:${sunriseMin}am`;
         sunset.innerText =`${sunsetHour}:${sunsetMin}pm`;
     }).catch(error=>{
