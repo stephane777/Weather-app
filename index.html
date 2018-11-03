@@ -35,7 +35,7 @@
     </header>
     <section class="weather">
         <div class="frame">
-            <div class="temp"></div>
+            <div class="tmp"></div>
             <ion-icon name="pin"></ion-icon>
             <div id="city-gps">
                 <div id="city"></div>
@@ -45,14 +45,16 @@
             </div>
             <div id="description"></div>
             <img id="img">
-            <div id="temperature"></div>
+            <div class="temp"><span id="temperature"></span><span id="celcius">˚C</span> | <span id="farenheit">˚F</span></div>
             <div class="info">
                 <div class="info-left">
-                    <div class="info-left-date"><p><span></span></p></div>
+                    <div class="info-left-date">
+                        <p><span></span></p>
+                    </div>
                     <div class="i-thermo">
                         <i class="wi wi-thermometer"></i>
                     </div>
-                    <div class="temp">
+                    <div id="max-min">
                         <p><span id='tMax'></span></p>
                         <p><span id='tMin'></span></p>
                     </div>
@@ -70,7 +72,9 @@
                 <div class="info-right">
                     <div class="info-center-50percent right"><i class="wi wi-barometer"></i></div>
                     <div class="info-center-50percent left">
-                        <p><p></i><span id='pressure'></span></p></p>
+                        <p>
+                            <p></i><span id='pressure'></span></p>
+                        </p>
                     </div>
                     <div class="info-center-50percent right"><i class="wi wi-sunrise"></i></div>
                     <div class="info-center-50percent left"><span id="sunrise"></span></div>
@@ -78,6 +82,10 @@
                     <div class="info-center-50percent left"><span id="sunset"></span></div>
                 </div>
             </div>
+            <footer>
+                <div>Developed with Javascript ES6, a weather app by Stephane CANDELAS.</div>
+                <div class="github"><a href="https://github.com/stephane777" target="blank"><ion-icon name="logo-github"></ion-icon></a></div>
+            </footer>
         </div>
     </section>
 </body>

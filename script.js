@@ -32,7 +32,10 @@
     let sunset = document.getElementById("sunset");
     let inputEl = document.getElementById("city_search");
     let date = document.querySelector(".info-left-date > p > span");
-    
+    let tempF, maxF, minF, tempC, maxC, minC; // variable created to switch units between Farenheit and celcius in UI.
+    let _unit ="C"; //value possible ["C","F"]; C = Celcius; F = Farenheit;
+    let celcius = document.getElementById("celcius");
+    let farenheit = document.getElementById("farenheit");
 
     const getURL = weatherId =>{
         const listIDs = {
@@ -83,18 +86,21 @@
             const DMSCoord = converter( result.coord.lon,result.coord.lat);
             lgt.innerHTML = DMSCoord[1];
             lat.innerHTML = DMSCoord[0];
-            
+            updateUnitUI(0);
         }
+        convertCTF(result.main.temp, result.main.temp_max, result.main.temp_min);
         const url = getURL(result.weather[0].id);
         document.body.style.backgroundImage = `url(${url})`; // Mist
         document.querySelector('.frame').style.visibility = 'visible';
-        // date.innerText = convertUTCDate(result.dt);
         city.innerText = `${result.name}, ${result.sys.country}`;
         description.innerText = result.weather[0].description;
-        temperature.innerText = `${result.main.temp} ˚C`;
+        temperature.innerText = `${result.main.temp}`;
+        tempC = result.main.temp;
         img.src =`https://openweathermap.org/img/w/${result.weather[0].icon}.png`;
-        tMax.innerText = `${result.main.temp_max} ˚`;
-        tMin.innerText = `${result.main.temp_min} ˚`;
+        tMax.innerText = `${result.main.temp_max} ˚C`;
+        maxC = result.main.temp_max;
+        tMin.innerText = `${result.main.temp_min} ˚C`;
+        minC = result.main.temp_min;
         pressure.innerText = `${result.main.pressure} hPa`;
         humidity.innerText = `${result.main.humidity} %`;
         wind.innerText = `${result.wind.speed} m/s`;
@@ -107,11 +113,12 @@
         const sunsetMin = sunsetDate.getMinutes();
         sunrise.innerText =`${sunriseHour}h${sunriseMin}`;
         sunset.innerText =`${sunsetHour}h${sunsetMin}`;
+        _unit = "C";
     }
 
     inputEl.addEventListener('click', event=>{
         event.target.style.color = "#777";
-        event.target.value = "";
+        // event.target.value = "";
     })
     const throwError = errorMsg => {
         inputEl =  document.getElementById("city_search");
@@ -126,6 +133,38 @@
         const months = { 0 : "January", 1 : "February", 2 : "March", 3 : "April", 4 : "May", 5 : "June", 6 : "July", 7 : "August", 8 : "September", 9 : "October", 10 : "November", 11 : "December"};
         return `${ days[myDate.getDay()]} ${myDate.getDate()} ${months[myDate.getMonth()]}`
         // console.log(myDate.toLocaleString());
+    }
+
+    const convertCTF = (tempC,maxC,minC) => { // tempC = temperature Celcius; maxC = temperature max in celcius; minC = temperature min in Celcius;
+        
+        const convert = t =>{
+            return Number( (t * 9/5) + 32 ).toFixed(2);
+        }
+        tempF = convert(tempC);
+        maxF = convert(maxC);
+        minF = convert(minC);
+        return [tempF, maxF, minF];
+    }
+
+    const updateUnitUI = (unit) =>{
+        const unitData = {
+            temperature : [tempC, tempF],
+            tMax : [`${maxC} ˚C`, `${maxF} ˚F`],
+            tMin : [`${minC} ˚C`, `${minF} ˚F`],
+            celciusFS : ["38px","18px"],
+            celciusC : ["#333","#777"],
+            farenheitFS : ["18px","38px"],
+            farenheitC : ["#777", "#333"],
+            unit : ["C","F"]
+        }
+        temperature.innerText = unitData.temperature[unit];
+        tMax.innerText = unitData.tMax[unit];
+        tMin.innerText = unitData.tMin[unit];
+        celcius.style.fontSize = unitData.celciusFS[unit];
+        celcius.style.color = unitData.celciusC[unit];
+        farenheit.style.fontSize = unitData.farenheitFS[unit];
+        farenheit.style.color = unitData.farenheitC[unit];
+        _unit = unitData.unit[unit];
     }
 
     /** getLocation function return longitude and latitude gps coordinate. values will be used with fetch API */
@@ -164,20 +203,34 @@
         // getTimeZone(-0.1694557, 51.461735399999995 );
         return getWeather(coord);
     }).then( result =>{
+        
         updateUI(result, "local");
     }).catch(error=>{
         console.log(error);
     })
 
-
+    // el = search button to get a weather for the chosen location;
     el.addEventListener('click', event =>{
         searchWeather(event);
+        event.target.value = "";
     })
     inputEl.addEventListener('keypress', event =>{
         if (event.code === 13 || event.which === 13) {
             searchWeather(event);
+            event.target.value = "";
         }
     })
+    celcius.addEventListener('click', event =>{
+        if ( _unit ==="F"){
+            updateUnitUI(0);
+        }
+    })
+    farenheit.addEventListener('click', event =>{
+        if ( _unit === "C"){
+            updateUnitUI(1);
+        }
+    })
+
     const searchWeather = (_event)=>{
         const input = document.getElementById("city_search").value;       
         if (input.length > 2){

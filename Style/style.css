@@ -12,9 +12,10 @@ body{
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
-    height: 100vh;
+    /* height: 100vh; */
     /* font-family: 'Montserrat', sans-serif; */
     font-family: 'Open Sans', sans-serif;
+    /* margin-bottom: 40px; */
 }
 .header-wrapper{
     height: 150px;
@@ -65,9 +66,10 @@ input {
  .frame{
      /* background:rgba(243, 243, 243, 0.692); */
      background-color: rgba(256, 256, 256, 0.5);
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
+    /* padding-bottom: 40px; */
     width: 800px;
-    height: 450px;
+    height: 480px;
     border: 1px solid #777;
     text-align: center;
     color:#111;
@@ -77,10 +79,11 @@ input {
  #city{
      font-size: 45px;
      /* font-weight: bold; */
-     display: inline-block;
+     /* display: inline-block; */
      vertical-align: middle;
      padding: 20px 0 5px 0;
      letter-spacing: 1.2px;
+     text-align: left;
      /* line-height: 50px; */
  }
 
@@ -100,6 +103,18 @@ input {
      display: inline-block;
      vertical-align: middle;
  }
+ #celcius {
+     font-size: 38px;
+     color: #333;
+     vertical-align: middle;
+     cursor: pointer;
+ }
+ #farenheit {
+     font-size: 18px;
+     color: #777;
+     vertical-align: middle;
+     cursor: pointer;
+ }
  .frame > ion-icon {
      font-size: 44px;
      vertical-align: top;
@@ -117,7 +132,7 @@ input {
      width: 40%;
      display: inline-block;
      /* vertical-align: middle; */
-     padding-top: 26px;
+     padding-top: 16px;
  }
  .left {
     text-align: left;
@@ -128,22 +143,26 @@ input {
      padding-right: 5px;
  }
  .info-right > div:first-child {
-     padding-right: 18px;
+     padding-right: 10px;
+     width: 37%;
  }
  .info-left-date {
     font-size: 16px;
     font-weight: bold;
-    padding-bottom: 30px;
+    padding-bottom: 12px;
  }
 
 #timestamp {
     font-weight: bold;
 }
-
+#max-min {
+    display: inline-block;
+    width: 90px;
+}
  /* textarea, input { outline: none; } */
 
  .info  {
-     padding-top: 40px;
+     padding-top: 20px;
  }
  .info-left, .info-center, .info-right{
      display: inline-block;
@@ -159,7 +178,7 @@ input {
     display: inline-block;
     font-size: 22px;
 }
- .i-thermo, .temp {
+ .i-thermo, .tmp {
      display: inline-block;
  }
  .i-thermo {
@@ -168,8 +187,12 @@ input {
      padding-right: 5px;
  }
  .temp {
+     display: inline-block;
+     width: 220px;
+     text-align: left;
+ }
+ .tmp {
     width: 80px;
-
  }
 .wi-sunrise {
     color: rgb(184, 157, 4);
@@ -185,4 +208,27 @@ input {
 }
 .wi-thermometer {
     color : rgb(187, 38, 1);
+}
+
+footer > div:first-child {
+    margin: 25px 10px 0 10px;
+    padding: 3px 0;
+    background-color: #bbb;
+    font-size: 14px;
+    font-style: italic;
+}
+.github {
+    padding-top: 10px;
+    font-size: 24px;
+}
+.github > a {
+    text-decoration: none;
+}
+
+.github > a:active,
+.github > a:visited {
+    color: #000;
+}
+.github > a:hover {
+    color: #777;
 }
