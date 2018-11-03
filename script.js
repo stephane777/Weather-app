@@ -199,7 +199,7 @@
     }
 
     const getTimeZone = (lg, lt)=>{
-        fetch(`http://api.timezonedb.com/v2.1/get-time-zone?key=C995R0ZBAI8X&format=json&by=position&lat=${lt}&lng=${lg}`)
+        fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=C995R0ZBAI8X&format=json&by=position&lat=${lt}&lng=${lg}`)
         .then( result =>{
             return result.json();
         })
