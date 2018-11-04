@@ -101,7 +101,16 @@ input {
 #gps{
     text-align: left;
 }
-
+#gps > a {
+    text-decoration: none;
+    color: #666;
+    
+}
+#gps > a:hover {
+    color: #00f;
+    font-style:italic;
+    /* font-size: 17px; */
+}
  #img {
      vertical-align: middle;
  }
