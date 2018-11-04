@@ -87,13 +87,20 @@ input {
      /* line-height: 50px; */
  }
 
- #city + p {
-     padding-bottom: 40px;
-     /* text-align: left; */
+ #tatayoyo {
+    padding-bottom: 40px;
+    border: 1px solid red;
  }
+
 #city-gps {
      display: inline-block;
+     padding-bottom: 40px;
+     text-align: center:
  }
+
+#gps{
+    text-align: left;
+}
 
  #img {
      vertical-align: middle;

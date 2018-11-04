@@ -11,10 +11,15 @@
 // GET : http://api.wunderground.com/api/Your_Key/geolookup/q/37.776289,-122.395234.json
 //lat={lat}&lon={lon}
 
+// how to call google maps request with gps longitude, latitude
+// https://google.com/maps/bylatlng?lat=51.461712&lng=-0.1694293
+// http://maps.google.com/?ie=UTF8&hq=&ll=51.461712,-0.1694293&z=13
+// http://maps.google.com/maps?q=51.461712,-0.1694293+(My+Point)&z=14&ll=51.461712,-0.1694293
 
 
-    let lgt = document.getElementById("longitude");
-    let lat = document.getElementById("latitude");
+    // let lgt = document.getElementById("longitude");
+    // let lat = document.getElementById("latitude");
+    let gps = document.getElementById("gps");
     let timestamp = document.getElementById("timestamp");
     let city = document.getElementById("city");
     let description = document.getElementById("description");
@@ -33,6 +38,7 @@
     let inputEl = document.getElementById("city_search");
     let date = document.querySelector(".info-left-date > p > span");
     let tempF, maxF, minF, tempC, maxC, minC; // variable created to switch units between Farenheit and celcius in UI.
+    let lg,lt;
     let _unit ="C"; //value possible ["C","F"]; C = Celcius; F = Farenheit;
     let celcius = document.getElementById("celcius");
     let farenheit = document.getElementById("farenheit");
@@ -82,16 +88,25 @@
     })
     
     const updateUI = (result, typeSearch) => {
+        const sunriseDate = new Date(result.sys.sunrise*1000);
+        const sunriseHour = sunriseDate.getHours();
+        const sunriseMin = sunriseDate.getMinutes();
+        const sunsetDate = new Date(result.sys.sunset*1000);
+        const sunsetHour = sunsetDate.getHours();
+        const sunsetMin = sunsetDate.getMinutes();
+        const url = getURL(result.weather[0].id);
+
         if ( typeSearch === "citySearch"){
             const DMSCoord = converter( result.coord.lon,result.coord.lat);
-            lgt.innerHTML = DMSCoord[1];
-            lat.innerHTML = DMSCoord[0];
+            gps.innerHTML = `<a href="http://maps.google.com/maps?q=${result.coord.lat},${result.coord.lon}+(My+Point)&z=7.03&ll=${result.coord.lat},${result.coord.lon}" target="_blank">${DMSCoord[1]} - ${DMSCoord[0]}</a>`
+            // lgt.innerHTML = DMSCoord[1];
+            // lat.innerHTML = DMSCoord[0];
             updateUnitUI(0);
         }
+        // function to convert celcius to Farenheit
         convertCTF(result.main.temp, result.main.temp_max, result.main.temp_min);
-        const url = getURL(result.weather[0].id);
+        
         document.body.style.backgroundImage = `url(${url})`; // Mist
-        document.querySelector('.frame').style.visibility = 'visible';
         city.innerText = `${result.name}, ${result.sys.country}`;
         description.innerText = result.weather[0].description;
         temperature.innerText = `${result.main.temp}`;
@@ -105,15 +120,11 @@
         humidity.innerText = `${result.main.humidity} %`;
         wind.innerText = `${result.wind.speed} m/s`;
         deg.innerHTML =`<i class="wi wi-wind from-${result.wind.deg}-deg"></i>`;
-        const sunriseDate = new Date(result.sys.sunrise*1000);
-        const sunriseHour = sunriseDate.getHours();
-        const sunriseMin = sunriseDate.getMinutes();
-        const sunsetDate = new Date(result.sys.sunset*1000);
-        const sunsetHour = sunsetDate.getHours();
-        const sunsetMin = sunsetDate.getMinutes();
         sunrise.innerText =`${sunriseHour}h${sunriseMin}`;
         sunset.innerText =`${sunsetHour}h${sunsetMin}`;
         _unit = "C";
+
+        document.querySelector('.frame').style.visibility = 'visible';
     }
 
     inputEl.addEventListener('click', event=>{
@@ -146,6 +157,10 @@
         return [tempF, maxF, minF];
     }
 
+    // function to update UI for unit value for unit [0, 1];
+    // unit = 0 => update UI for Celcius
+    // unit = 1 => update UI for Farenheit
+    
     const updateUnitUI = (unit) =>{
         const unitData = {
             temperature : [tempC, tempF],
@@ -186,7 +201,7 @@
         try{
             const result = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${coordS[0]}&lon=${coordS[1]}&units=metric&appid=cc93c5e0ed63d39279c7218d068aa015`);
             const data = await result.json();
-            console.log(coordS);
+            // console.log(coordS);
             return data;
         }catch(error){
             console.log("error");
@@ -196,14 +211,17 @@
 
     getLoc.then(coord=>{
         const DMSCoord = converter(coord[1],coord[0]);
-        lgt.innerHTML = DMSCoord[1];
-        lat.innerHTML = DMSCoord[0];
+        // lgt.innerHTML = DMSCoord[1];
+        // lat.innerHTML = DMSCoord[0];
+        lg = DMSCoord[1];
+        lt = DMSCoord[0];
+        
         // getTimeZone( Number.parseFloat(coord[1].toFixed(5)), Number.parseFloat(coord[0].toFixed(5)));
         getTimeZone( coord[1], coord[0]);
         // getTimeZone(-0.1694557, 51.461735399999995 );
         return getWeather(coord);
     }).then( result =>{
-        
+        gps.innerHTML = `<a href="http://maps.google.com/maps?q=${result.coord.lat},${result.coord.lon}+(My+Point)&z=7.03&ll=${result.coord.lat},${result.coord.lon}" target="_blank">${lg} - ${lt}</a>`
         updateUI(result, "local");
     }).catch(error=>{
         console.log(error);
