@@ -7,7 +7,7 @@
 }
 body{
     /* background-image: url('https://farm2.staticflickr.com/1927/31766452788_94b6c6292f_m.jpg'); */
-    background-image :url('https://farm2.staticflickr.com/1927/31766452788_ef6006168c_o.jpg');
+    background-image :url('https://farm2.staticflickr.com/1908/45717468821_2aca69f4e3_h.jpg');
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -17,8 +17,15 @@ body{
     font-family: 'Open Sans', sans-serif;
     /* margin-bottom: 40px; */
 }
+.weather {
+    display: none;
+}
+.home {
+    display : block;
+}
 .header-wrapper{
     height: 150px;
+    visibility: hidden;
     /* padding-top:100px; */
 }
 .search-input{
@@ -63,7 +70,7 @@ input {
     color: #777;
     /* vertical-align: bottom; */
 }
- .frame{
+ .frame , .frameHome {
      /* background:rgba(243, 243, 243, 0.692); */
      background-color: rgba(256, 256, 256, 0.5);
     margin: 0 auto 40px auto;
@@ -74,9 +81,12 @@ input {
     text-align: center;
     color:#111;
     box-shadow: 2px 2px #555;
-    visibility: hidden;
  }
- #city{
+.frameHome{
+    background-color: rgba(256, 256, 256, 0.8);
+}
+
+ #city, #titleHome{
      font-size: 45px;
      /* font-weight: bold; */
      /* display: inline-block; */
@@ -86,7 +96,9 @@ input {
      text-align: left;
      /* line-height: 50px; */
  }
-
+#titleHome {
+    display: inline-block;
+}
  #tatayoyo {
     padding-bottom: 40px;
     border: 1px solid red;
@@ -106,7 +118,9 @@ input {
     color: #666;
     
 }
-#gps > a:hover {
+#gps > a:hover,
+.openWeather-api > a:hover,
+.timeZoneDB-api > a:hover {
     color: #00f;
     font-style:italic;
     /* font-size: 17px; */
@@ -178,7 +192,7 @@ input {
  /* textarea, input { outline: none; } */
 
  .info  {
-     padding-top: 20px;
+     padding: 20px 0 15px 0;
  }
  .info-left, .info-center, .info-right{
      display: inline-block;
@@ -226,25 +240,72 @@ input {
     color : rgb(187, 38, 1);
 }
 
-footer > div:first-child {
-    margin: 25px 10px 0 10px;
+footer > div:first-child, .footer > div:first-child{
+    margin: 10px 10px 0 10px;
     padding: 3px 0;
-    background-color: #bbb;
+    background-color:#999;
     font-size: 14px;
     font-style: italic;
+    /* color: #fff; */
 }
-.github {
-    padding-top: 10px;
-    font-size: 24px;
+.github, .linkedin, .main-page {
+    display: inline-block;
+    padding: 10px 10px 0 10px;
+    font-size: 20px;
 }
-.github > a {
+.github > a:hover,
+.linkedin > a:hover,
+.main-page > a:hover {
+    color: #777;
+}
+.github > a,
+.linkedin > a,
+.main-page > a,
+.openWeather-api > a,
+.timeZoneDB-api > a {
     text-decoration: none;
 }
 
-.github > a:active,
-.github > a:visited {
+/* .github a,
+.main-page a, */
+.openWeather-api a,
+.timeZoneDB-api a {
     color: #000;
 }
-.github > a:hover {
-    color: #777;
+.linkedin > a,
+.main-page > a,
+.github > a {
+    /* color : #0077B5;
+     */
+     color: #ccc;
+}
+#openWeather-api-img > img {
+    padding: 0 10px;
+}
+#openWeather-api-img {
+    padding-top: 10px;
+    /* padding-bottom: 5px; */
+}
+.weather-app-info {
+    display: inline-block;
+    /* margin-left: 25px; */
+    padding-bottom: 25px;
+    font-size: 13px;
+    text-align: left;
+    width: 500px;
+}
+.weather-app-info > ul > li {
+    padding: 7px 0;
+}
+#background-icon {
+    /* border: 1px solid red; */
+    padding: 0 10px;
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+}
+
+figcaption {
+    font-size : 10px;
+    font-style: italic;
 }

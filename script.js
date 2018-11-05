@@ -12,8 +12,6 @@
 //lat={lat}&lon={lon}
 
 // how to call google maps request with gps longitude, latitude
-// https://google.com/maps/bylatlng?lat=51.461712&lng=-0.1694293
-// http://maps.google.com/?ie=UTF8&hq=&ll=51.461712,-0.1694293&z=13
 // http://maps.google.com/maps?q=51.461712,-0.1694293+(My+Point)&z=14&ll=51.461712,-0.1694293
 
 
@@ -37,7 +35,7 @@
     let sunset = document.getElementById("sunset");
     let inputEl = document.getElementById("city_search");
     let date = document.querySelector(".info-left-date > p > span");
-    let tempF, maxF, minF, tempC, maxC, minC; // variable created to switch units between Farenheit and celcius in UI.
+    let tempF, maxF, minF, tempC, maxC, minC, windMpS; // variable created to switch units between Farenheit and celcius in UI.
     let lg,lt;
     let _unit ="C"; //value possible ["C","F"]; C = Celcius; F = Farenheit;
     let celcius = document.getElementById("celcius");
@@ -119,15 +117,18 @@
         pressure.innerText = `${result.main.pressure} hPa`;
         humidity.innerText = `${result.main.humidity} %`;
         wind.innerText = `${result.wind.speed} m/s`;
+        windMpS = result.wind.speed;
         deg.innerHTML =`<i class="wi wi-wind from-${result.wind.deg}-deg"></i>`;
         sunrise.innerText =`${sunriseHour}h${sunriseMin}`;
         sunset.innerText =`${sunsetHour}h${sunsetMin}`;
         _unit = "C";
 
-        document.querySelector('.frame').style.visibility = 'visible';
+        document.querySelector('.header-wrapper').style.visibility = 'visible';
+        document.querySelector('.weather').style.display = 'block';
+        document.querySelector('.home').style.display ='none';
     }
 
-    inputEl.addEventListener('click', event=>{
+    inputEl.addEventListener('click', event => {
         event.target.style.color = "#777";
         // event.target.value = "";
     })
@@ -135,7 +136,6 @@
         inputEl =  document.getElementById("city_search");
         inputEl.style.color = "red";
         inputEl.value = errorMsg;
-        
     }
     const convertUTCDate = date => {
         const myDate = new Date( date );
@@ -147,7 +147,6 @@
     }
 
     const convertCTF = (tempC,maxC,minC) => { // tempC = temperature Celcius; maxC = temperature max in celcius; minC = temperature min in Celcius;
-        
         const convert = t =>{
             return Number( (t * 9/5) + 32 ).toFixed(2);
         }
@@ -170,7 +169,8 @@
             celciusC : ["#333","#777"],
             farenheitFS : ["18px","38px"],
             farenheitC : ["#777", "#333"],
-            unit : ["C","F"]
+            unit : ["C","F"],
+            wind : [`${windMpS} m/s`, `${( windMpS*2.23694 ).toFixed(1)} mph`]
         }
         temperature.innerText = unitData.temperature[unit];
         tMax.innerText = unitData.tMax[unit];
@@ -180,6 +180,14 @@
         farenheit.style.fontSize = unitData.farenheitFS[unit];
         farenheit.style.color = unitData.farenheitC[unit];
         _unit = unitData.unit[unit];
+        wind.innerText = unitData.wind[unit];
+    }
+
+    // function will return the related hour from 0 -12 in order to the appropriate icon
+    // <i class="wi wi-time-1">  ... <i class="wi wi-time-12">
+    const getHour = () =>{
+
+        return hour;
     }
 
     /** getLocation function return longitude and latitude gps coordinate. values will be used with fetch API */
