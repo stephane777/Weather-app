@@ -248,32 +248,27 @@ footer > div:first-child, .footer > div:first-child{
     font-style: italic;
     /* color: #fff; */
 }
-.github, .linkedin, .main-page {
+.github, .linkedin {
     display: inline-block;
     padding: 10px 10px 0 10px;
     font-size: 20px;
 }
 .github > a:hover,
-.linkedin > a:hover,
-.main-page > a:hover {
+.linkedin > a:hover {
     color: #777;
 }
 .github > a,
 .linkedin > a,
-.main-page > a,
 .openWeather-api > a,
 .timeZoneDB-api > a {
     text-decoration: none;
 }
 
-/* .github a,
-.main-page a, */
 .openWeather-api a,
 .timeZoneDB-api a {
     color: #000;
 }
 .linkedin > a,
-.main-page > a,
 .github > a {
     /* color : #0077B5;
      */
@@ -308,4 +303,33 @@ footer > div:first-child, .footer > div:first-child{
 figcaption {
     font-size : 10px;
     font-style: italic;
+}
+#go-to-weatherApp,
+#go-home {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 12px;
+
+}
+#go-to-weatherApp > a,
+#go-home > a {
+    text-decoration: none;
+    color: #111;
+}
+#go-to-weatherApp > a:hover,
+#go-home > a:hover {
+    font-style: italic;
+    color: #00f;
+}
+#go-to-weatherApp > ion-icon,
+#go-to-weatherApp > a,
+#go-home > ion-icon,
+#go-home > a {
+    vertical-align: middle;
+}
+#go-to-weatherApp > ion-icon,
+#go-home > ion-icon {
+    color: #00f;
+    font-size: 16px;
 }

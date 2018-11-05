@@ -185,9 +185,27 @@
 
     // function will return the related hour from 0 -12 in order to the appropriate icon
     // <i class="wi wi-time-1">  ... <i class="wi wi-time-12">
-    const getHour = () =>{
+    // const getHour = () =>{
 
-        return hour;
+    //     return hour;
+    // }
+
+    // function to switch bidirectional between the home page and the weather app
+    const switchTo = page => {
+        console.log('toto et tata');
+        let headerWrapper = document.querySelector('.header-wrapper');
+        let weather = document.querySelector('.weather');
+        let home = document.querySelector('.home');
+        if ( page === "weatherApp"){
+            // console.log('tata yoyo');
+            headerWrapper.style.visibility = 'visible';
+            weather.style.display = 'block';
+            home.style.display ='none';
+        } else {
+            headerWrapper.style.visibility = 'hidden';
+            weather.style.display = 'none';
+            home.style.display ='block';
+        }
     }
 
     /** getLocation function return longitude and latitude gps coordinate. values will be used with fetch API */
